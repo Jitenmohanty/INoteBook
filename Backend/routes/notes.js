@@ -1,8 +1,9 @@
 const router = require("express").Router();
+const fetchuser = require('../Middleware/userCredential');
+const { getAllNotes, addNotes } = require('../Controller/noteController')
 
-router.post('/',(req,res)=>{
-    console.log(req.body)
-    res.json([])
-})
+
+router.get('/getallnotes',fetchuser,getAllNotes);
+router.post('/addnote',fetchuser,addNotes);
 
 module.exports = router;

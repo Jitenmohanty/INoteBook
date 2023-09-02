@@ -2,7 +2,6 @@ const User = require("../models/User");
 const bcrypt = require("bcrypt");
 const jwt = require('jsonwebtoken')
 const JWT_SECRET = "JituNoteApp"
-const fetchuser = require('../Middleware/userCredential')
 
 module.exports.register = async (req, res, next) => {
   try {
