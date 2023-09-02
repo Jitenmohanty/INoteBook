@@ -2,6 +2,7 @@ const User = require("../models/User");
 const bcrypt = require("bcrypt");
 const jwt = require('jsonwebtoken')
 const JWT_SECRET = "JituNoteApp"
+const fetchuser = require('../Middleware/userCredential')
 
 module.exports.register = async (req, res, next) => {
   try {
@@ -54,5 +55,19 @@ module.exports.login = async (req, res, next) => {
     return res.json({ status: true, user });
   } catch (ex) {
     next(ex);
+  }
+};
+
+// ROUTE 3: Get loggedin User Details using: POST "/api/auth/getuser". Login required
+
+module.exports.getUser = async (req, res, next) => {
+  try {
+    const userId = req.user.id;
+    const user = await User.findById(userId).select("-password")
+    res.send(user)
+    // res.json({ status: true, user })
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send("Internal Server Error");
   }
 };
