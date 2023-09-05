@@ -4,6 +4,7 @@ import Home from './components/Home'
 import Navbar from './components/Navbar';
 import About from './components/About';
 import NoteState from './Context/notes/NoteState';
+import {Toaster} from 'react-hot-toast'
 function App() {
   return (
     <NoteState>
@@ -16,6 +17,7 @@ function App() {
             <Route path='/about' element={<About />} />
           </Routes>
         </div>
+        <Toaster/>
       </Router>
     </NoteState>
 

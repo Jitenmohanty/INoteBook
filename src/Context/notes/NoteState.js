@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import NoteContext from './notesContext'
+import { toast } from 'react-hot-toast';
 
 const NoteState = ({ children }) => {
   const host = "http://localhost:3005";
@@ -29,14 +30,14 @@ const NoteState = ({ children }) => {
       },
       body: JSON.stringify({ title, description, tag })
     });
-    const allNotes = await response.json();
-
+    const addNotes = await response.json();
+    console.log(addNotes)
     const note = {
       "_id": "64f2d38869885741aac016ce",
       "user": "64f1f1c356f08ebe7b4ce82a",
-      "title": "myTitle 8",
-      "description": "My first note 2",
-      "tag": "my Achive 2",
+      "title": title,
+      "description": description,
+      "tag": tag,
       "createdAt": "2023-09-02T06:17:44.584Z",
       "updatedAt": "2023-09-02T06:17:44.584Z",
       "__v": 0
@@ -56,11 +57,12 @@ const NoteState = ({ children }) => {
     const delNote = await response.json();
     console.log(delNote);
     const newNote = notes.filter((note) => note._id !== id);
+    toast.success("Notes Deleted Successfully")
     setNotes(newNote)
   }
 
   const editNote = (id, title, description, tag) => {
-
+    
   }
   return (
     <NoteContext.Provider value={{ notes, addNote, deleteNote, editNote, getAllNotes }}>
