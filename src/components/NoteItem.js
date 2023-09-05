@@ -15,7 +15,7 @@ const NoteItem = ({ note }) => {
         </div>
         <div className='d-flex aligh-items-center mx-2  my-2 ' >
           <RiDeleteBin5Line style={{ marginRight: '5px',color:'red',cursor:'pointer' }} onClick={() => { deleteNote(note._id) }} />
-          <RiEditBoxLine style={{color:'blue',cursor:'pointer' }}/>
+          <RiEditBoxLine style={{color:'blue',cursor:'pointer' }} />
         </div>
       </div>
     </div>
