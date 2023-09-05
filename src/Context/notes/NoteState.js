@@ -72,16 +72,20 @@ const NoteState = ({ children }) => {
           const note ={
             "_id": "61322f119553781a8ca8d0e08",
             "user": "6131dc5e3e4037cd4734a066",
-            "title": "My Title [added]",
-            "description": "Please wake up early [added]",
+            "title": title,
+            "description": description,
             "tag": "personal",
             "date": "2021-09-03T14:20:09.668Z",
             "__v": 0
           }
           setNotes(notes.concat(note))
       }
+      const deleteNote = (id)=>{
+          const newNote = notes.filter((note)=> note._id !== id);
+          setNotes(newNote)
+      }
     return (
-        <NoteContext.Provider value={{notes,addNote}}>
+        <NoteContext.Provider value={{notes,addNote,deleteNote}}>
             {children}
         </NoteContext.Provider>
     )
