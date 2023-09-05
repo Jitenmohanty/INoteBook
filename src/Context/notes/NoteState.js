@@ -16,23 +16,45 @@ const NoteState = ({ children }) => {
 
     });
     const allNotes = await response.json();
-      // console.log(allNotes);
-      setNotes(allNotes)
+    // console.log(allNotes);
+    setNotes(allNotes)
   }
 
-  const addNote = (title, description, tag) => {
+  const addNote = async (title, description, tag) => {
+    const response = await fetch(`${host}/api/notes/addnote`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjRmMWYxYzM1NmYwOGViZTdiNGNlODJhIn0sImlhdCI6MTY5MzYyNzE0Nn0.ZBs5L6DyFEtJH3wPowoLKBINN8NkJ-40zRcRPGCrb10"
+      },
+      body: JSON.stringify({ title, description, tag })
+    });
+    const allNotes = await response.json();
+
     const note = {
-      "_id": "61322f119553781a8ca8d0e08",
-      "user": "6131dc5e3e4037cd4734a066",
-      "title": title,
-      "description": description,
-      "tag": "personal",
-      "date": "2021-09-03T14:20:09.668Z",
+      "_id": "64f2d38869885741aac016ce",
+      "user": "64f1f1c356f08ebe7b4ce82a",
+      "title": "myTitle 8",
+      "description": "My first note 2",
+      "tag": "my Achive 2",
+      "createdAt": "2023-09-02T06:17:44.584Z",
+      "updatedAt": "2023-09-02T06:17:44.584Z",
       "__v": 0
     }
     setNotes(notes.concat(note))
+
   }
-  const deleteNote = (id) => {
+  const deleteNote = async (id) => {
+
+    const response = await fetch(`${host}/api/notes/deletenote/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjRmMWYxYzM1NmYwOGViZTdiNGNlODJhIn0sImlhdCI6MTY5MzYyNzE0Nn0.ZBs5L6DyFEtJH3wPowoLKBINN8NkJ-40zRcRPGCrb10"
+      },
+    });
+    const delNote = await response.json();
+    console.log(delNote);
     const newNote = notes.filter((note) => note._id !== id);
     setNotes(newNote)
   }
