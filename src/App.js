@@ -5,6 +5,8 @@ import Navbar from './components/Navbar';
 import About from './components/About';
 import NoteState from './Context/notes/NoteState';
 import {Toaster} from 'react-hot-toast'
+import Login from './components/Login';
+import SignUp from './components/SignUp';
 function App() {
   return (
     <NoteState>
@@ -15,6 +17,8 @@ function App() {
           <Routes>
             <Route path='/' element={<Home />} />
             <Route path='/about' element={<About />} />
+            <Route path='/login' element={<Login />} />
+            <Route path='/signup' element={<SignUp />} />
           </Routes>
         </div>
         <Toaster/>

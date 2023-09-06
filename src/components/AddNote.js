@@ -22,7 +22,7 @@ const AddNote = () => {
         <form>
           <div className="mb-3">
             <label htmlFor="exampleInputEmail1" className="form-label">
-              Title
+              Title *
             </label>
             <input
               type="text"
@@ -32,11 +32,12 @@ const AddNote = () => {
               aria-describedby="emailHelp"
               onChange={onChange}
               value={note.title}
+              required
             />
           </div>
           <div className="mb-3">
             <label htmlFor="exampleInputPassword1" className="form-label">
-              Descriptions
+              Descriptions *
             </label>
             <input
               type="text"
@@ -45,6 +46,7 @@ const AddNote = () => {
               id="description"
               onChange={onChange}
               value={note.description}
+              required
             />
           </div>
           <div className="mb-3">
@@ -58,9 +60,11 @@ const AddNote = () => {
               id="tag"
               onChange={onChange}
               value={note.tag}
+              required
             />
           </div>
           <button
+            disabled={note.title === "" || note.description == ""}
             type="submit"
             className="btn btn-primary"
             onClick={handleSubmit}
