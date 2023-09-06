@@ -35,7 +35,7 @@ const Notes = () => {
 
   useEffect(() => {
     getAllNotes();
-  }, []);
+  }, [getAllNotes]);
 
   return (
     <div>
@@ -84,6 +84,7 @@ const Notes = () => {
                     name="etitle"
                     aria-describedby="emailHelp"
                     onChange={onChange}
+                    required
                   />
                 </div>
                 <div className="mb-3">
@@ -97,6 +98,7 @@ const Notes = () => {
                     name="edescription"
                     id="edescription"
                     onChange={onChange}
+                    required
                   />
                 </div>
                 <div className="mb-3">
@@ -110,6 +112,7 @@ const Notes = () => {
                     name="etag"
                     id="etag"
                     onChange={onChange}
+                    required
                   />
                 </div>
               </form>
