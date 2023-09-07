@@ -1,7 +1,7 @@
 const User = require("../models/User");
 const bcrypt = require("bcrypt");
-const jwt = require('jsonwebtoken')
-const JWT_SECRET = "JituNoteApp"
+const jwt = require("jsonwebtoken");
+const JWT_SECRET = "JituNoteApp";
 
 module.exports.register = async (req, res, next) => {
   try {
@@ -20,13 +20,13 @@ module.exports.register = async (req, res, next) => {
     });
     const data = {
       user: {
-        id: user.id
-      }
-    }
+        id: user.id,
+      },
+    };
     const authToken = jwt.sign(data, JWT_SECRET);
-    res.json({ authToken })
-    delete user.password;
-    return res.json({ status: true, user });
+    return res.json({ authToken, status: true });
+    // delete user.password;
+    // return res.json({ status: true, user });
   } catch (ex) {
     next(ex);
   }
@@ -34,21 +34,27 @@ module.exports.register = async (req, res, next) => {
 
 module.exports.login = async (req, res, next) => {
   try {
+    let success = false;
     const { email, password } = req.body;
     const user = await User.findOne({ email });
-    if (!user)
+    if (!user) {
+      success = false;
       return res.json({ msg: "Incorrect Username or Password", status: false });
-    const isPasswordValid = bcrypt.compare(password, user.password);
-    if (!isPasswordValid)
+    }
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+    if (!isPasswordValid) {
+      success = false;
       return res.json({ msg: "Incorrect Username or Password", status: false });
+    }
 
     const data = {
       user: {
-        id: user.id
-      }
-    }
+        id: user.id,
+      },
+    };
     const authToken = jwt.sign(data, JWT_SECRET);
-    res.json({ authToken })
+    success = true;
+    res.json({ authToken, success });
 
     delete user.password;
     return res.json({ status: true, user });
@@ -62,11 +68,11 @@ module.exports.login = async (req, res, next) => {
 module.exports.getUser = async (req, res, next) => {
   try {
     const userId = req.user.id;
-    const user = await User.findById(userId).select("-password")
-    res.send(user)
+    const user = await User.findById(userId).select("-password");
+    return res.send(user);
     // res.json({ status: true, user })
   } catch (error) {
     console.error(error.message);
-    res.status(500).send("Internal Server Error");
+    return res.status(500).send("Internal Server Error");
   }
 };
