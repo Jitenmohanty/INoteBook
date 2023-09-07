@@ -12,8 +12,7 @@ const NoteState = ({ children }) => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        "auth-token":
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjRmMWYxYzM1NmYwOGViZTdiNGNlODJhIn0sImlhdCI6MTY5MzYyNzE0Nn0.ZBs5L6DyFEtJH3wPowoLKBINN8NkJ-40zRcRPGCrb10",
+        "auth-token": localStorage.getItem("token"),
       },
     });
     const allNotes = await response.json();
@@ -25,8 +24,7 @@ const NoteState = ({ children }) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "auth-token":
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjRmMWYxYzM1NmYwOGViZTdiNGNlODJhIn0sImlhdCI6MTY5MzYyNzE0Nn0.ZBs5L6DyFEtJH3wPowoLKBINN8NkJ-40zRcRPGCrb10",
+        "auth-token": localStorage.getItem("token")
       },
       body: JSON.stringify({ title, description, tag }),
     });
@@ -38,14 +36,13 @@ const NoteState = ({ children }) => {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
-        "auth-token":
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjRmMWYxYzM1NmYwOGViZTdiNGNlODJhIn0sImlhdCI6MTY5MzYyNzE0Nn0.ZBs5L6DyFEtJH3wPowoLKBINN8NkJ-40zRcRPGCrb10",
+        "auth-token": localStorage.getItem("token")
       },
     });
     const delNote = await response.json();
     console.log(delNote);
     const newNote = notes.filter((note) => note._id !== id);
-    toast.success("Notes Deleted Successfully");
+    toast.error("Notes Deleted Successfully");
     setNotes(newNote);
   };
 
@@ -54,8 +51,7 @@ const NoteState = ({ children }) => {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
-        "auth-token":
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjRmMWYxYzM1NmYwOGViZTdiNGNlODJhIn0sImlhdCI6MTY5MzYyNzE0Nn0.ZBs5L6DyFEtJH3wPowoLKBINN8NkJ-40zRcRPGCrb10",
+        "auth-token": localStorage.getItem("token")
       },
       body: JSON.stringify({ id, title, description, tag }),
     });

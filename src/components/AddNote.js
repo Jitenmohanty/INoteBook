@@ -17,7 +17,7 @@ const AddNote = () => {
   };
   return (
     <div>
-      <div className="container my-3">
+      <div className="container my-3" >
         <h1>Add Your Notes</h1>
         <form>
           <div className="mb-3">
@@ -25,6 +25,7 @@ const AddNote = () => {
               Title *
             </label>
             <input
+               style={{ border: "2px solid #a8ada9",maxWidth:'30rem' }}
               type="text"
               className="form-control"
               id="title"
@@ -39,8 +40,9 @@ const AddNote = () => {
             <label htmlFor="exampleInputPassword1" className="form-label">
               Descriptions *
             </label>
-            <input
+            <textarea
               type="text"
+              style={{ border: "2px solid #a8ada9",maxWidth:'30rem',height:'8rem',  }}   
               className="form-control"
               name="description"
               id="description"
@@ -54,6 +56,7 @@ const AddNote = () => {
               Tag
             </label>
             <input
+               style={{ border: "2px solid #a8ada9",maxWidth:'30rem' }}
               type="text"
               className="form-control"
               name="tag"

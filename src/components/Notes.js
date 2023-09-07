@@ -2,12 +2,15 @@ import React, { useState, useContext, useEffect, useRef } from "react";
 import NoteContext from "../Context/notes/notesContext";
 import NoteItem from "./NoteItem";
 import AddNote from "./AddNote";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-hot-toast";
 
 const Notes = () => {
   const context = useContext(NoteContext);
   const { notes, getAllNotes, editNote } = context;
   const ref = useRef(null);
   const refCloseModal = useRef(null);
+  let navigate = useNavigate();
   const [note, setNote] = useState({
     id: "",
     etitle: "",
@@ -34,7 +37,12 @@ const Notes = () => {
   };
 
   useEffect(() => {
-    getAllNotes();
+    if(localStorage.getItem('token')){
+      getAllNotes();
+    }
+    else{
+      navigate('/login')
+    }
   }, [getAllNotes]);
 
   return (
